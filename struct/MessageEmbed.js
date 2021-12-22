@@ -7,10 +7,10 @@ const { MessageEmbed } = require('discord.js');
 class ExtendedMessageEmbed extends MessageEmbed {
   /**
    * Potentially add a field.
-   * @param {Boolean} condition The condition which determine if field is added
-   * @param {String} name The name of the field
-   * @param {String} value The value of the string
-   * @param {Boolean} [inline] If the field is inline
+   * @param {boolean} condition The condition which determine if field is added
+   * @param {string} name The name of the field
+   * @param {string} value The value of the string
+   * @param {boolean} [inline] If the field is inline
    * @returns {this}
    */
   addPotentialField(condition, name, value, inline = false) {
@@ -20,8 +20,8 @@ class ExtendedMessageEmbed extends MessageEmbed {
 
   /**
    * Potentially set an image.
-   * @param {Boolean} condition The condition which determine if image is set
-   * @param {String} url The image url
+   * @param {boolean} condition The condition which determine if image is set
+   * @param {string} url The image url
    * @returns {this}
    */
   setPotentialImage(condition, url) {
