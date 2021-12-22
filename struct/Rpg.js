@@ -16,7 +16,7 @@ class Rpg {
   /**
    * Add HP to an user.
    * @param {User} user The user to add HP
-   * @param {Number} hp The HP level
+   * @param {number} hp The HP level
    */
   async addHP(user, hp) {
     const _user = await this.getUser(user);
@@ -32,8 +32,8 @@ class Rpg {
 
   /**
    * Define the level based on the number of experience points.
-   * @param {Number} xp The xp level
-   * @returns {Number[]}
+   * @param {number} xp The xp level
+   * @returns {number[]}
    */
   calculateLevel(xp) {
     const levelUser = Math.floor(0.25 * Math.sqrt(xp));
@@ -46,20 +46,19 @@ class Rpg {
   /**
    * Add a new user to the database.
    * @param {User} user The user parameters
-   * @param {Object} [options] The additional options
-   * @param {Number} [options.xp] The user xp level
-   * @param {Object} [options.hp] The user hp parameters
-   * @param {Number} [options.hp.level] The user hp level
-   * @param {Number} [options.hp.max] The highest possible hp level attainable by the member
-   * @param {Number} [options.coins] The user coins
-   * @param {Array} [options.items] The user inventory
-   * @param {Object} [options.profile] The user profile parameters
-   * @param {String} [options.profile.color] The hex color of the member profile
-   * @param {String} [options.position] The member position on the map
-   * @param {Object} [options.quests] The member quests parameters
+   * @param {object} [options] The additional options
+   * @param {number} [options.xp] The user xp level
+   * @param {object} [options.hp] The user hp parameters
+   * @param {number} [options.hp.level] The user hp level
+   * @param {number} [options.hp.max] The highest possible hp level attainable by the member
+   * @param {number} [options.coins] The user coins
+   * @param {*[]} [options.items] The user inventory
+   * @param {object} [options.profile] The user profile parameters
+   * @param {string} [options.profile.color] The hex color of the member profile
+   * @param {string} [options.position] The member position on the map
+   * @param {*[]} [options.quests] The member quests parameters
    */
-  async createUser(user, options = {}) {
-    const { xp = 0, hp = { level: 20, max: 20 }, coins = 10, items = [], profile = { color: '#54abeb' }, position = '⚓ Port Isonvale', quests = [] } = options;
+  async createUser(user, { xp, hp, coins, items, profile, position, quests } = { xp: 0, hp: { level: 20, max: 20 }, coins: 10, items:  [], profile: { color: '#54abeb' }, position: '⚓ Port Isonvale', quests: [] }) {  
     const merged = await Object.assign({ _id: mongoose.Types.ObjectId(), userID: user.id, userName: user.username, xp, hp, coins, items, profile, position, quests });
     const createUser = await new User(merged);
     return await createUser.save();
@@ -76,7 +75,7 @@ class Rpg {
 
   /**
    * Find an item in the database.
-   * @param {String} name The item name
+   * @param {string} name The item name
    */
   async getItem(name) {
     const data = await Item.findOne({ name: { $regex: new RegExp(`${name}`, 'gi') || new RegExp(`${name}|:\\w*:`, 'gi') } });
@@ -85,7 +84,7 @@ class Rpg {
 
   /**
    * Find a pnj in the database.
-   * @param {String} pnjName The pnj name
+   * @param {string} pnjName The pnj name
    */
   async getPnj(pnjName) {
     const data = await Pnj.findOne({ name: pnjName });
@@ -94,7 +93,7 @@ class Rpg {
 
   /**
    * Find the position of an user in the database.
-   * @param {User|String} userOrPosition The user or position
+   * @param {User|string} userOrPosition The user or position
    */
   async getPosition(userOrPosition) {
     const _user = await this.getUser(userOrPosition);
@@ -113,8 +112,8 @@ class Rpg {
 
   /**
    * Send a dialog box of a pnj.
-   * @param {String} pnjName The pnj name
-   * @param {Number} n The number of the dialog box
+   * @param {string} pnjName The pnj name
+   * @param {number} n The number of the dialog box
    * @param {Message} message The sent message
    */
   async pnj(pnjName, n, message) {
@@ -131,8 +130,8 @@ class Rpg {
 
   /**
    * Edit parameters of an item in the database.
-   * @param {Stirng} name The item name
-   * @param {Object} settings The new value(s) for the item
+   * @param {string} name The item name
+   * @param {object} settings The new value(s) for the item
    */
   async updateItem(name, settings) {
     const data = await this.getItem(name);
@@ -145,7 +144,7 @@ class Rpg {
   /**
    * Edit parameters of an user in the database.
    * @param {User} user The user to edit
-   * @param {Object} settings The new value(s) for the user
+   * @param {object} settings The new value(s) for the user
    */
   async updateUser(user, settings) {
     const data = await this.getUser(user);
