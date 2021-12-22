@@ -562,7 +562,7 @@ class KyofuClient extends Client {
     if (command.and) embed.setFooter(command.and);
     if (command.andImg) embed.setImage(command.andImg);
 
-    return message.channel.send(embed);
+    return message.channel.send({ embeds: [embed] });
   }
 
   /**
