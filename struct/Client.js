@@ -7,6 +7,7 @@ const {
   Message,
   Role,
   User,
+  ClientOptions
 } = require('discord.js');
 const MessageEmbed = require('./MessageEmbed');
 const Rpg = require('./Rpg');
@@ -25,6 +26,11 @@ const Todo = require('../models/todo');
  * @extends Client
  */
 class KyofuClient extends Client {
+  /**
+   * Initialize the client.
+   * @param {object} options The options of the client
+   * @param {ClientOptions} options.clientOptions The options of the client
+   */
   constructor(options) {
     super(options.clientOptions || {});
 
@@ -417,7 +423,7 @@ class KyofuClient extends Client {
 
   /**
    * Log an error in the console and a channel in the developer server.
-   * @param {Error} error The error to display
+   * @param {Error | unknown} error The error to display
    */
   logError(error) {
     const errorMessage = `Uh! A${
