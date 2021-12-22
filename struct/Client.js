@@ -29,14 +29,25 @@ class KyofuClient extends Client {
     super(options.clientOptions || {});
 
     /**
+     * @typedef Command
+     * @property {string} name The name of the command
+     * @property {string} description The description of the command
+     * @property {string} usage The usage of the command
+     * @property {string} category The category of the command
+     * @property {string[]} aliases The aliases of the command
+     * @property {string} img The image of the command
+     * @property {any} and I don't know what this is
+     * @property {any} andImg I don't know what this is too
+     */
+
+    /**
      * All the commands of the bot.
-     * @type {Collection}
+     * @type {Collection<string, Command>}
      */
     this.commands = new Collection();
 
     /**
      * Helper for some stuff.
-     * @type {helper}
      */
     this.helper = helper;
 
