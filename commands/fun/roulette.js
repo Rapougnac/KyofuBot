@@ -12,7 +12,7 @@ module.exports = {
   /**
    * @param {Client} client
    * @param {Message} message
-   * @param {String[]} args
+   * @param {string[]} args
    */
   async execute(client, message, args) {
     if (!args.length) return client.sendHelpPage(this.name, message);

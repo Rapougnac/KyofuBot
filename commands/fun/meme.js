@@ -12,7 +12,7 @@ module.exports = {
   /**
    * @param {Client} client
    * @param {Message} message
-   * @param {String[]} args
+   * @param {string[]} args
    */
   execute(client, message, args) {
     got('https://www.reddit.com/r/memes/random/.json').then(response => {
